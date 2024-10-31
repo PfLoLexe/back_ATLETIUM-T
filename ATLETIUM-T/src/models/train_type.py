@@ -3,7 +3,7 @@
 from sqlmodel import SQLModel, Field, Relationship
 
 class TrainTypeDefault(SQLModel):
-    label: str
+    name: str
 
 
 class TrainType(TrainTypeDefault, table=True):

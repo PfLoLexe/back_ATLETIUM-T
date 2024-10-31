@@ -3,15 +3,12 @@ from uuid import uuid4, UUID
 from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 
-class TrainDefault(SQLModel):
-    label: str
-    place_id: UUID
-    train_type_id: UUID
-    start_time: datetime.time
-    end_time: datetime.time
-    week_day_number: int
+class DialogueDefault(SQLModel):
+    first_user_id: UUID = Field(index=True)
+    second_user_id: UUID = Field(index=True)
 
-class Train(TrainDefault, table=True):
+
+class Dialogue(DialogueDefault, table=True):
     id: UUID = Field(
         default_factory=uuid4,
         primary_key=True,

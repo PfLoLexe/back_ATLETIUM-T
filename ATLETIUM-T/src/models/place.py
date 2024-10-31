@@ -3,7 +3,7 @@ from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 
 class PlaceDefault(SQLModel):
-    label: str
+    name: str
 
 class PLace(PlaceDefault, table=True):
     id: UUID = Field(
