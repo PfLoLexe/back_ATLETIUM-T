@@ -14,18 +14,8 @@ class UserDefault(SQLModel):
     middle_name: Optional[str] = Field(nullable=True)
 
 
-class UserCreate(UserDefault):
-    password: str
-
-
 class UserPasswordDefault(UserDefault):
     hashed_password: str
-
-
-class UserPasswordUpdate(SQLModel):
-    old_password: str
-    new_password: str
-
 
 class User(UserPasswordDefault, table=True):
     id: UUID = Field(

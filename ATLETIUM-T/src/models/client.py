@@ -8,8 +8,8 @@ from src.models.role import Roles
 
 
 class ClientDefault(SQLModel):
-    firstname: str = None
-    lastname: str = None
+    firstname: str
+    lastname: str
     middle_name: Optional[str] = Field(nullable=True)
     phone_number: Optional[str] = Field(nullable=True)
     age: Optional[int] = Field(nullable=True)

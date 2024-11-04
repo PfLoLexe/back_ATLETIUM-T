@@ -16,7 +16,6 @@ class MessageWithFK(MessageDefault):
         nullable=True
     )
 
-
 class Message(MessageWithFK, table=True):
     id: UUID = Field(
         default_factory=uuid4,
@@ -24,5 +23,5 @@ class Message(MessageWithFK, table=True):
         nullable=False
     )
     is_read: bool
-    read_date: datetime.datetime
+    read_date: Optional[datetime.datetime] = Field(nullable=True)
 

@@ -6,6 +6,6 @@ ItemCreatedSuccessfully: JSONResponse = JSONResponse(
     )
 
 ItemUpdatedSuccessfully: JSONResponse = JSONResponse(
-        status_code=200,
-        content={"message": "Item updated successfully"}
-    )
+    status_code=200,
+    content={"message": "Item updated successfully"}
+)

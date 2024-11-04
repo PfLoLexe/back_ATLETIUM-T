@@ -10,12 +10,12 @@
 )
 VALUES
 	('admin', NULL, NULL, NULL, 'admin',
-		'$2b$12$uD5GmGwZt/adbsvdU/xAvueWFLpP0eViBkg06EPc/YKwY3e9KI/NS',
+		'$2b$12$uD5GmGwZt/adbsvdU/xAvuX1e2UkhqNywMJKOtdO3rZstRHcq2ALS',
 		'74bbfdef-f556-4845-9afc-88292985228c',
 		true
 	),
 	('user', 'Иванонов', 'Иван', 'Иванович', 'trainer',
-		'$2b$12$uD5GmGwZt/adbsvdU/xAvuKN5vwsXzoXCZ9Q6.xdZqmU88cF.qAiu',
+		'$2b$12$uD5GmGwZt/adbsvdU/xAvuOot/.8/lSn6Wn4BtZ/PfZswzpt6zx12',
 		'5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
 		true
 	);
@@ -83,7 +83,6 @@ VALUES
 	 '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
     );
 
-
 INSERT INTO train_specific(
 	clients_amount,
     description,
@@ -100,3 +99,137 @@ VALUES
      '38b40437-0541-44ed-871a-f1a04fba179b',
      '953d1949-23ab-4364-8c70-68a09e2387c1'
     );
+
+INSERT INTO client(
+    firstname,
+    lastname,
+    middle_name,
+    phone_number,
+    age,
+    parent_phone_number,
+    is_parent,
+    id)
+VALUES
+    (
+     'Александр',
+     'Александров',
+     'Александрович',
+     '+7idinahoi45',
+     NULL,
+     NULL,
+     FALSE,
+     '6f793564-ce9d-417e-b5df-6324eca497d0'
+    ),
+    (
+     'Анастасия',
+     'Анастасьевна',
+     'Александровна',
+     '+79995556545',
+     NULL,
+     NULL,
+     TRUE,
+     '82f2d1f9-3681-4d72-b3cf-4589a62d4631'
+    ),
+    (
+     'Евгений',
+     'Евгеньев',
+     'Евгеньевич',
+     '+78885554445',
+     17,
+     '+79995556545',
+     FALSE,
+     '26e49df1-ed81-48de-9ed6-604a32b5f4cf'
+    ),
+    (
+     'Яна',
+     'Дождева',
+     'Романовна',
+     '+76665559945',
+     17,
+     NULL,
+     FALSE,
+     '91b6a9fa-b306-4b81-9006-203cc787518f'
+    ),
+    (
+     'Максимильян',
+     'Моррель',
+     'Ишакович',
+     '+74445557645',
+     39,
+     NULL,
+     FALSE,
+     '6f75c0bc-7ae1-46c3-b0f8-1589fc11d5cf'
+    );
+
+INSERT INTO dialogue(
+	first_user_id,
+    second_user_id,
+    id)
+VALUES
+    (
+     '74bbfdef-f556-4845-9afc-88292985228c',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
+     '5f092ba3-70b4-409a-a153-a698a3bd41ed'
+    );
+
+INSERT INTO message(
+	text,
+    sender_user_id,
+    dialogue_id,
+    parent_message_id,
+    id,
+    send_date,
+    is_read,
+    read_date)
+VALUES
+    (
+     'Hi, User!',
+     '74bbfdef-f556-4845-9afc-88292985228c',
+     '5f092ba3-70b4-409a-a153-a698a3bd41ed',
+     NULL,
+     '369f50dc-07c4-4b8c-a9c1-aabfa12de715',
+     '1.11.2024 10:00:00',
+     FALSE,
+     NULL
+    ),
+    (
+     'Hi, Admin',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
+     '5f092ba3-70b4-409a-a153-a698a3bd41ed',
+     NULL,
+     '077ddf22-2ce5-4088-bf2e-250d6f6021fc',
+     '1.11.2024 10:10:00',
+     FALSE,
+     NULL
+    ),
+    (
+     'How are you, Admin?',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
+     '5f092ba3-70b4-409a-a153-a698a3bd41ed',
+     NULL,
+     '13b2bea7-4aed-4295-a347-de799bc520cd',
+     '1.11.2024 10:20:00',
+     FALSE,
+     NULL
+    ),
+    (
+     'I''m fine!',
+     '74bbfdef-f556-4845-9afc-88292985228c',
+     '5f092ba3-70b4-409a-a153-a698a3bd41ed',
+     NULL,
+     '7d164d7a-066e-4f4f-a15d-917cc56eb918',
+     '1.11.2024 10:30:00',
+     FALSE,
+     NULL
+    );
+
+-- INSERT INTO train_main_to_client_link(
+-- 	train_main_id,
+--     client_id,
+--     id)
+-- VALUES
+--     (
+--      '',
+--      '',
+--      ''
+--     );
