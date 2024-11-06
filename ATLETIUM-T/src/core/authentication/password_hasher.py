@@ -1,17 +1,16 @@
-﻿import os
-import bcrypt
-from dotenv import load_dotenv
+﻿import bcrypt
 
-load_dotenv()
+from src.core.config import app_configuration
 
-class Hasher:
+
+class PasswordHasher:
     @staticmethod
     def get_password_hash(password: str, username: str) -> str:
         hashed_username = bcrypt.hashpw(
             username.encode(),
-            salt=(os.getenv("USERNAME_SALT")).encode()
+            salt=app_configuration.username_salt.encode()
         ).decode()
         return bcrypt.hashpw(
             (hashed_username+password).encode(),
-            salt=(os.getenv("PWD_SALT")).encode()
+            salt=app_configuration.password_salt.encode()
         ).decode()

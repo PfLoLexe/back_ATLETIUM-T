@@ -6,7 +6,7 @@ from sqlmodel import select
 from src.models.client import Client
 from src.models.train_main_to_client_link import TrainMainToClientLink
 from src.models.train_specific_to_client_link import TrainSpecificToClientLink
-from src.responses.client import ClientShortResponse
+from src.schemas.responses.client import ClientShortResponse
 
 
 def get_short_clients_of_train_main(session, train_main_id: UUID) -> List[ClientShortResponse]:

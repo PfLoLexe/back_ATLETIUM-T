@@ -1,27 +1,22 @@
 ﻿import uuid
-from typing import List
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
 
-from src.db import get_session
-from src.exceptions.common_exceptions import InternalServerErrorException
-from src.models.client import Client
-from src.models.train_main_to_client_link import TrainMainToClientLink
+from src.core.db import app_db
+from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.models.train_specific import TrainSpecific
-from src.models.train_specific_to_client_link import TrainSpecificToClientLink
-from src.requests.train_specific import TrainSpecificRequest
-from src.responses.client import ClientShortResponse
-from src.responses.train_specific import TrainSpecificDataResponse
-from src.utils.clients.clients_to_train_link import get_short_clients_of_train_specific, get_short_clients_of_train_main
+from src.schemas.requests.train_specific import TrainSpecificRequest
+from src.schemas.responses.train_specific import TrainSpecificDataResponse
+from src.services.clients.clients_to_train_link import get_short_clients_of_train_specific, get_short_clients_of_train_main
 from src.utils.sql.sql_query import SqlQuery
-from src.utils.trains.train_main_to_specific import generate_train_specific
+from src.services.trains.train_main_to_specific import generate_train_specific
 
 train_specific_router = APIRouter()
 sql_query = SqlQuery()
 
-@train_specific_router.post("/train-specific/get")
-def get_specific_train(data: TrainSpecificRequest, session = Depends(get_session)) -> TrainSpecificDataResponse:
+@train_specific_router.post("/get")
+def get_specific_train(data: TrainSpecificRequest, session = Depends(app_db.get_session)) -> TrainSpecificDataResponse:
     try:
         train_specific_raw = session.exec(
             select(

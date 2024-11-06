@@ -6,15 +6,15 @@ from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel import select, Session
 
-from src.db import get_session
-from src.exceptions.common_exceptions import InternalServerErrorException, UnauthorizedException
+from src.core.db import app_db
+from src.schemas.exceptions.common_exceptions import InternalServerErrorException, UnauthorizedException
 from src.models.user import User
 from src.models.role import Roles
-from src.requests.auth_request_models import AuthenticationRequest
-from src.serializers.user import UserAuthenticationSerializer
+from src.schemas.requests.auth_request_models import AuthenticationRequest
+from src.schemas.serializers.user import UserAuthenticationSerializer
 
-from src.utils.hasher import Hasher
-from src.utils.token import TokenModel, Token
+from src.core.authentication.password_hasher import PasswordHasher
+from src.core.authentication.token import TokenModel, Token
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token") #TODO: add tokenURL to env
 
@@ -55,7 +55,7 @@ class Authentication:
         user = self.get_user(
             session,
             username=auth_data.username,
-            hashed_password=Hasher.get_password_hash(
+            hashed_password=PasswordHasher.get_password_hash(
                 auth_data.password,
                 auth_data.username
             )
@@ -70,7 +70,7 @@ class Authentication:
             )
         )
 
-    def current_user(self, session: Session = Depends(get_session), token: str = Depends(oauth2_scheme)) -> Optional[UUID]:
+    def current_user(self, session: Session = Depends(app_db.get_session), token: str = Depends(oauth2_scheme)) -> Optional[UUID]:
         user_auth_data = self.token.decode_token(TokenModel(access_token=token))
         if not user_auth_data or user_auth_data.username is None or user_auth_data.hashed_password is None:
             raise UnauthorizedException
@@ -80,3 +80,4 @@ class Authentication:
             raise UnauthorizedException
         return user.user_id
 
+authentication_handler: Authentication = Authentication()

@@ -1,10 +1,9 @@
-﻿from datetime import time, datetime
-from typing import List, Optional
+﻿from typing import List, Optional
 from uuid import UUID
 
 from sqlmodel import SQLModel
 
-from src.responses.client import ClientShortResponse
+from src.schemas.responses.client import ClientShortResponse
 
 
 class TrainSpecificDataResponse(SQLModel):

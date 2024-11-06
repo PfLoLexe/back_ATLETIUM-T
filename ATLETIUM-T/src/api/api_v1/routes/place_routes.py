@@ -1,18 +1,17 @@
 ﻿from fastapi import APIRouter, Depends
-from typing import TypedDict, List
 
 from sqlmodel import select
 from starlette.responses import JSONResponse
 
-from src.db import get_session
-from src.exceptions.common_exceptions import InternalServerErrorException
+from src.core.db import app_db
+from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.models.place import PlaceDefault, PLace
-from src.responses.common_responses import ItemCreatedSuccessfully
+from src.schemas.responses.common_responses import ItemCreatedSuccessfully
 
 place_router = APIRouter()
 
-@place_router.post("/place/add")
-def post_add_place(place: PlaceDefault, session = Depends(get_session)) -> JSONResponse:
+@place_router.post("/add")
+def post_add_place(place: PlaceDefault, session = Depends(app_db.get_session)) -> JSONResponse:
     try:
         place = PLace.model_validate(place)
         session.add(place)
@@ -24,8 +23,8 @@ def post_add_place(place: PlaceDefault, session = Depends(get_session)) -> JSONR
         return InternalServerErrorException
 
 
-@place_router.get("/place/get-list")
-def get_list_of_places(session = Depends(get_session)):
+@place_router.get("/get-list")
+def get_list_of_places(session = Depends(app_db.get_session)):
     try:
         places = session.exec(select(PLace)).all()
         return places

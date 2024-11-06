@@ -1,24 +1,20 @@
 ﻿from typing import List
 
 from fastapi import APIRouter, Depends
-from sqlalchemy import text, select
+from sqlalchemy import select
 from sqlmodel import or_
 
-from src.db import get_session
-from src.exceptions.common_exceptions import InternalServerErrorException
-from src.models import train_main
+from src.core.db import app_db
+from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.models.place import PLace
 from src.models.train_main import TrainMain
-from src.requests.train_main import TrainMainListRequest
-from src.responses.train_main import TrainMainListItemResponse
-from src.routers.auth_routes import authentication
-from src.utils.sql.sql_query import SqlQuery
+from src.schemas.requests.train_main import TrainMainListRequest
+from src.schemas.responses.train_main import TrainMainListItemResponse
 
 train_main_router = APIRouter()
-sql_query = SqlQuery()
 
-@train_main_router.post("/train-main/get-list/by-week-day-number")
-def get_list_of_main_trains(data: TrainMainListRequest, session = Depends(get_session)) -> List[TrainMainListItemResponse]:
+@train_main_router.post("/get-list/by-week-day-number")
+def get_list_of_main_trains(data: TrainMainListRequest, session = Depends(app_db.get_session)) -> List[TrainMainListItemResponse]:
     try:
         result = session.exec(
             select(
