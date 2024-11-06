@@ -27,7 +27,7 @@ def get_specific_train(data: TrainSpecificRequest, session = Depends(app_db.get_
                 TrainSpecific.train_main_id == data.train_main_id,
                 TrainSpecific.date == data.date,
             )
-        ).one()
+        ).first()
         if train_specific_raw is not None:
             train_specific = TrainSpecificDataResponse(
                 id=train_specific_raw.id,

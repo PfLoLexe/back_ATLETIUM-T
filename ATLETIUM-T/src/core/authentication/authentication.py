@@ -39,7 +39,8 @@ class Authentication:
                     User.hashed_password == hashed_password
                 )
             ).first()
-            #TODO: add user not found except
+            if user is None:
+                return None
             return UserAuthenticationSerializer(
                 user_id=user.id,
                 role=user.role,
@@ -60,7 +61,7 @@ class Authentication:
                 auth_data.username
             )
         )
-        if not user or user.is_active is False or (user.role is not Roles.trainer and user.role is not Roles.admin):
+        if not user or user.is_active is False:
             raise UnauthorizedException
         return self.token.create_access_token(
             AuthenticationRequest(

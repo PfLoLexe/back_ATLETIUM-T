@@ -5,14 +5,14 @@ from dotenv import load_dotenv
 
 class Config:
 
-    username_salt: str
-    password_salt: str
-    jwt_token_type: str
-    access_token_expire_time_long: str
-    access_token_expire_time_standard: str
-    jwt_algorithm: str
-    jwt_secret_key: str
-    db_url: str
+    username_salt: str = None
+    password_salt: str = None
+    jwt_token_type: str = None
+    access_token_expire_time_long: str = None
+    access_token_expire_time_standard: str = None
+    jwt_algorithm: str = None
+    jwt_secret_key: str = None
+    db_url: str = None
 
     def load_configuration(self):
         load_dotenv()

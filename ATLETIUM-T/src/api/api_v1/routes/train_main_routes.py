@@ -28,6 +28,7 @@ def get_list_of_main_trains(data: TrainMainListRequest, session = Depends(app_db
 
             ).where(
                 TrainMain.week_day_number == data.week_day_number,
+                TrainMain.trainer_id == data.trainer_id,
                 or_(TrainMain.date == None, TrainMain.date == data.date),
                 TrainMain.place_id == PLace.id
             )

@@ -12,6 +12,7 @@ class TrainSpecificDefault(SQLModel):
 
 class TrainSpecificWithFK(TrainSpecificDefault):
     train_main_id: UUID = Field(nullable=False, index=True)
+    trainer_id: UUID = Field(nullable=False, index=True)
 
 class TrainSpecific(TrainSpecificWithFK, table=True):
     __tablename__: str = "train_specific"

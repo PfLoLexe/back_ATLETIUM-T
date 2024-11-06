@@ -40,7 +40,7 @@ INSERT INTO train_main(
 	week_day_number,
     "date",
 	id,
-    trainer_user_id)
+    trainer_id)
 VALUES
 	(
 	 'Плавание 10+',
@@ -89,6 +89,7 @@ INSERT INTO train_specific(
     "date",
     is_over,
     train_main_id,
+    trainer_id,
     id)
 VALUES
     (
@@ -97,6 +98,7 @@ VALUES
      '31.10.2024',
      true,
      '38b40437-0541-44ed-871a-f1a04fba179b',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
      '953d1949-23ab-4364-8c70-68a09e2387c1'
     );
 

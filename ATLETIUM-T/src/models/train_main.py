@@ -13,7 +13,7 @@ class TrainMainDefault(SQLModel):
 class TrainMainWithFK(TrainMainDefault):
     place_id: UUID = Field(nullable=False)
     train_type_id: UUID = Field(nullable=False)
-    trainer_user_id: UUID = Field(nullable=False, index=True)
+    trainer_id: UUID = Field(nullable=False, index=True)
 
 class TrainMain(TrainMainWithFK, table=True):
     __tablename__: str = "train_main"
