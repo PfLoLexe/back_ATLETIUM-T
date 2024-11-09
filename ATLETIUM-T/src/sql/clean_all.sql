@@ -27,3 +27,6 @@ WHERE ID is not NULL;
 
 DELETE FROM train_specific_to_client_link
 WHERE ID is not NULL;
+
+DELETE FROM pincode
+WHERE ID is not NULL;

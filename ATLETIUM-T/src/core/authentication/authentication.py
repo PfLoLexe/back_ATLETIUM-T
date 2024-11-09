@@ -7,13 +7,13 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlmodel import select, Session
 
 from src.core.db import app_db
+from src.models.pincode import Pincode
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException, UnauthorizedException
 from src.models.user import User
-from src.models.role import Roles
-from src.schemas.requests.auth_request_models import AuthenticationRequest
+from src.schemas.requests.auth_request_models import AuthenticationRequest, TokenRequest
 from src.schemas.serializers.user import UserAuthenticationSerializer
 
-from src.core.authentication.password_hasher import PasswordHasher
+from src.core.authentication.password_hasher import Hasher
 from src.core.authentication.token import TokenModel, Token
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -52,11 +52,12 @@ class Authentication:
             print(e)
             raise InternalServerErrorException
 
+
     def authenticate(self, session: Session, auth_data: AuthenticationRequest) -> TokenModel:
         user = self.get_user(
             session,
             username=auth_data.username,
-            hashed_password=PasswordHasher.get_password_hash(
+            hashed_password=Hasher.get_password_hash(
                 auth_data.password,
                 auth_data.username
             )
@@ -64,10 +65,10 @@ class Authentication:
         if not user or user.is_active is False:
             raise UnauthorizedException
         return self.token.create_access_token(
-            AuthenticationRequest(
+            TokenRequest(
                 username=user.username,
-                password=user.hashed_password,
-                remember_me=auth_data.remember_me
+                hashed_password=user.hashed_password,
+                role=user.role
             )
         )
 
@@ -80,5 +81,21 @@ class Authentication:
         if not user or user.is_active is False:
             raise UnauthorizedException
         return user.user_id
+
+
+    def verify_pincode(self, pincode_string: str, user_id: UUID, session) -> bool:
+        hashed_pincode_string = Hasher.get_pincode_hash(pincode_string)
+        pincode = session.exec(
+            select(
+                Pincode.id
+            ).where(
+                Pincode.user_id == user_id,
+                Pincode.hashed_pincode == hashed_pincode_string
+            )
+        ).first()
+        if pincode is None:
+            return False
+        return True
+        
 
 authentication_handler: Authentication = Authentication()

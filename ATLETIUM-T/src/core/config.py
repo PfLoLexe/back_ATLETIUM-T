@@ -7,6 +7,7 @@ class Config:
 
     username_salt: str = None
     password_salt: str = None
+    pincode_salt: str = None
     jwt_token_type: str = None
     access_token_expire_time_long: str = None
     access_token_expire_time_standard: str = None
@@ -22,6 +23,7 @@ class Config:
 
         self.username_salt = os.getenv("USERNAME_SALT")
         self.password_salt = os.getenv("PASSWORD_SALT")
+        self.pincode_salt = os.getenv("PINCODE_SALT")
 
         self.jwt_token_type = os.getenv("JWT_TOKEN_TYPE")
         self.access_token_expire_time_long = os.getenv("ACCESS_TOKEN_LONG_EXPIRE_TIME")

@@ -20,6 +20,23 @@ VALUES
 		true
 	);
 
+INSERT INTO public.pincode(
+	id,
+    hashed_pincode,
+    user_id
+)
+VALUES
+    (
+     'a4c3d3ee-0626-4f83-9374-c9fc92b1514d',
+     '$2b$12$NpA38wo6r6O/6xlxv0pLK.TOCEp4a24xQAV7FUu0krG726ZlUA51.',
+     '74bbfdef-f556-4845-9afc-88292985228c'
+    ),
+    (
+     'a851abe9-16dc-4efd-a3e2-843a57bfa0d6',
+     '$2b$12$NpA38wo6r6O/6xlxv0pLK.IoBufuAI2giawjGtWtJfTxRJuqkzjqi',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
+    );
+
 INSERT INTO place(name, id)
 VALUES
     ('Pool', '66c2ae22-3efb-454a-a2f3-1ae9133a575d'),
@@ -29,7 +46,7 @@ VALUES
 INSERT INTO train_type(name, id)
 VALUES
 	('Group', '47d9badb-dcda-49c9-9088-9e2606992b55'),
-	('personal', '751bf1ed-6a88-4e16-8e7c-1496821c50dd');
+	('Personal', '751bf1ed-6a88-4e16-8e7c-1496821c50dd');
 
 INSERT INTO train_main(
 	name,

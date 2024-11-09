@@ -10,5 +10,10 @@ ValidateFailedException: HTTPException = (
 
 UnauthorizedException = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
-    detail="Could not validate credentials",
+    detail="Unauthorized",
+)
+
+UnauthorizedExceptionWrongPincode = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Unauthorized pincode",
 )
