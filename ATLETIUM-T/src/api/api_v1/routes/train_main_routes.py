@@ -2,9 +2,12 @@
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
+from sqlalchemy.sql.functions import current_user
 from sqlmodel import or_
 
+from src.core.authentication.authentication import authentication_handler
 from src.core.db import app_db
+from src.models.train_type import TrainType
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.models.place import PLace
 from src.models.train_main import TrainMain
@@ -14,7 +17,10 @@ from src.schemas.responses.train_main import TrainMainListItemResponse
 train_main_router = APIRouter()
 
 @train_main_router.post("/get-list/by-week-day-number")
-def get_list_of_main_trains(data: TrainMainListRequest, session = Depends(app_db.get_session)) -> List[TrainMainListItemResponse]:
+def get_list_of_main_trains(data: TrainMainListRequest,
+                            session = Depends(app_db.get_session),
+                            current_user_id = Depends(authentication_handler.current_user)
+                            ) -> List[TrainMainListItemResponse]:
     try:
         result = session.exec(
             select(
@@ -22,15 +28,16 @@ def get_list_of_main_trains(data: TrainMainListRequest, session = Depends(app_db
                 TrainMain.name.label("name"),
                 TrainMain.start_time.label("start_time"),
                 TrainMain.end_time.label("end_time"),
-                PLace.name.label("place_name)"),
-                TrainMain.train_type_id.label("type_uuid"),
+                PLace.name.label("place_name"),
+                TrainType.name.label("type_name"),
                 TrainMain.date.label("date"),
 
             ).where(
                 TrainMain.week_day_number == data.week_day_number,
-                TrainMain.trainer_id == data.trainer_id,
                 or_(TrainMain.date == None, TrainMain.date == data.date),
-                TrainMain.place_id == PLace.id
+                TrainMain.place_id == PLace.id,
+                TrainMain.trainer_id == current_user_id,
+                TrainMain.train_type_id == TrainType.id,
             )
         )
         if result is not None:
@@ -49,7 +56,7 @@ def get_list_of_main_trains(data: TrainMainListRequest, session = Depends(app_db
 #     try:
 #         train = session.get(Train, train_id)
 #         if not train:
-#             raise trainNotFoundException
+#             raise TrainNotFoundException
 #         place = session.get(PLace, new_train_data.place_id)
 #         if not place:
 #             raise placeDoesNotExistException

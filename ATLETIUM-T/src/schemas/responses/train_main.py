@@ -9,7 +9,7 @@ class TrainMainListItemResponse(SQLModel):
     start_time: time
     end_time: time
     place_name: str
-    type_uuid: UUID
+    train_type: UUID
     date: datetime
 
     def __init__(
@@ -19,12 +19,12 @@ class TrainMainListItemResponse(SQLModel):
             start_time: time,
             end_time: time,
             place_name: str,
-            type_uuid: UUID,
+            type_name: str,
             date: datetime):
         self.id = id
         self.name = name
         self.start_time = start_time
         self.end_time = end_time
-        self.place = place_name
-        self.type = type_uuid
+        self.place_name = place_name
+        self.train_type = type_name
         self.date = date

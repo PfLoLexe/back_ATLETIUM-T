@@ -225,13 +225,13 @@ VALUES
      NULL
     );
 
--- INSERT INTO train_main_to_client_link(
--- 	train_main_id,
---     client_id,
---     id)
--- VALUES
---     (
---      '',
---      '',
---      ''
---     );
+INSERT INTO train_main_to_client_link(
+	train_main_id,
+    client_id,
+    id)
+VALUES
+    (
+     '41e5c441-16b4-4c98-a3a7-7bd32589e048',
+     '6f793564-ce9d-417e-b5df-6324eca497d0',
+     '659ab3e7-6eb1-49f0-916b-cc7dbbcde30d'
+    );

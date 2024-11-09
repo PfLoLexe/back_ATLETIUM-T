@@ -16,7 +16,7 @@ from src.schemas.serializers.user import UserAuthenticationSerializer
 from src.core.authentication.password_hasher import PasswordHasher
 from src.core.authentication.token import TokenModel, Token
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token") #TODO: add tokenURL to env
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 class Authentication:
     def __init__(self):

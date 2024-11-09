@@ -12,6 +12,7 @@ class Config:
     access_token_expire_time_standard: str = None
     jwt_algorithm: str = None
     jwt_secret_key: str = None
+    jwt_token_expire_time_string_format: str = None
     db_url: str = None
 
     def load_configuration(self):
@@ -27,5 +28,6 @@ class Config:
         self.access_token_expire_time_standard = os.getenv("ACCESS_TOKEN_STANDARD_EXPIRE_TIME")
         self.jwt_secret_key = os.getenv("SECRET_KEY")
         self.jwt_algorithm = os.getenv("JWT_TOKEN_GENERATION_ALGORITHM")
+        self.jwt_token_expire_time_string_format = os.getenv("JWT_TOKEN_EXPIRE_TIME_STRING_FORMAT")
 
 app_configuration: Config = Config()

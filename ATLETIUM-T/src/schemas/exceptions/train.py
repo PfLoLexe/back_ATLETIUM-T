@@ -2,7 +2,7 @@
 
 from fastapi import HTTPException
 
-trainNotFoundException = HTTPException(
+TrainNotFoundException = HTTPException(
     status_code=404,
     detail="Train not found",
 )

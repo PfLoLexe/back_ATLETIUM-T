@@ -4,8 +4,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 
 from src.core.db import app_db
+from src.models.train_main import TrainMain
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.models.train_specific import TrainSpecific
+from src.schemas.exceptions.train import TrainNotFoundException
 from src.schemas.requests.train_specific import TrainSpecificRequest
 from src.schemas.responses.train_specific import TrainSpecificDataResponse
 from src.services.clients.clients_to_train_link import get_short_clients_of_train_specific, get_short_clients_of_train_main
@@ -40,10 +42,20 @@ def get_specific_train(data: TrainSpecificRequest, session = Depends(app_db.get_
             )
             return train_specific
         else:
+            train_main = session.exec(
+                select(
+                    TrainMain.id
+                ).where(
+                    TrainMain.id == data.train_main_id,
+                )
+            ).all()
+            if train_main is None or len(train_main) == 0:
+                raise TrainNotFoundException
             train_specific_uuid = uuid.uuid4()
             generate_train_specific(
                 train_main_id=data.train_main_id,
-                train_specific_id=train_specific_uuid
+                train_specific_id=train_specific_uuid,
+                session=session,
             )
             clients_list = get_short_clients_of_train_main(
                 session=session,
@@ -55,8 +67,7 @@ def get_specific_train(data: TrainSpecificRequest, session = Depends(app_db.get_
                 clients_amount=len(clients_list),
                 clients_list=clients_list
             )
-
             return train_specific
     except Exception as e:
         print(e)
-        raise InternalServerErrorException
+        raise e

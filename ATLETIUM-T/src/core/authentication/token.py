@@ -1,5 +1,5 @@
 ﻿import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import jwt
 from sqlmodel import SQLModel
@@ -25,7 +25,9 @@ class Token():
             time_delta = timedelta(days=float(app_configuration.access_token_expire_time_long))
         else:
             time_delta = timedelta(minutes=float(app_configuration.access_token_expire_time_standard))
-        return str(datetime.utcnow() + time_delta)
+        expire = datetime.now(timezone.utc) + time_delta
+        expire_time = expire.timestamp()
+        return expire_time
 
     def create_access_token(self, token_request: AuthenticationRequest) -> TokenModel:
         expire_time = self.get_expire_time(token_request.remember_me)
@@ -43,6 +45,12 @@ class Token():
             payload = jwt.decode(token.access_token, app_configuration.jwt_secret_key, algorithms=[app_configuration.jwt_algorithm])
             username: str = payload.get("sub")
             password: str = payload.get("pass")
+
+            expire: str = payload.get("expire")
+            expire_time = datetime.fromtimestamp(expire, tz=timezone.utc)
+            if (not expire) or (expire_time < datetime.now(timezone.utc)):
+                return None
+
             return UserAuthenticationSerializer(username=username, hashed_password=password)
         except Exception as e:
             print(e)
