@@ -3,7 +3,6 @@ from datetime import date, datetime, time
 from typing import Optional
 from uuid import UUID
 
-from scripts.regsetup import description
 from sqlmodel import select
 
 from src.models.train_main import TrainMain

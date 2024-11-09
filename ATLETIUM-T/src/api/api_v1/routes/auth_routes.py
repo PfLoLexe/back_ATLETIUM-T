@@ -17,4 +17,4 @@ def login(data: AuthenticationRequest, session = Depends(app_db.get_session)) ->
 
 @auth_router.post("/users/me")
 def get_my_user(session=Depends(app_db.get_session), current_user = Depends(authentication_handler.current_user)):
-    print("!!!!!!!!", current_user)
+    return current_user
