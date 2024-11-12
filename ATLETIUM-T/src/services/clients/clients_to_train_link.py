@@ -15,7 +15,6 @@ def get_short_clients_of_train_main(session, train_main_id: UUID) -> List[Client
             Client.id.label("id"),
             Client.lastname.label("lastname"),
             Client.firstname.label("firstname"),
-
         ).where(
             TrainMainToClientLink.client_id == Client.id,
             TrainMainToClientLink.train_main_id == train_main_id,
