@@ -9,7 +9,16 @@ class MessageDefault(SQLModel):
 
 
 class MessageWithFK(MessageDefault):
-    sender_user_id: UUID = Field(index=True)
+    sender_user_id: UUID = Field(
+        index=True,
+        nullable=False,
+        default=None,
+    )
+    recipient_user_id: UUID = Field(
+        index=True,
+        nullable=False,
+        default=None,
+    )
     dialogue_id: UUID = Field(index=True)
     parent_message_id: Optional[UUID] = Field(
         default=None,

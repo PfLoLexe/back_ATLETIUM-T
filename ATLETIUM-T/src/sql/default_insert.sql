@@ -194,6 +194,7 @@ VALUES
 INSERT INTO message(
 	text,
     sender_user_id,
+    recipient_user_id,
     dialogue_id,
     parent_message_id,
     id,
@@ -204,6 +205,7 @@ VALUES
     (
      'Hi, User!',
      '74bbfdef-f556-4845-9afc-88292985228c',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
      '5f092ba3-70b4-409a-a153-a698a3bd41ed',
      NULL,
      '369f50dc-07c4-4b8c-a9c1-aabfa12de715',
@@ -214,6 +216,7 @@ VALUES
     (
      'Hi, Admin',
      '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
+     '74bbfdef-f556-4845-9afc-88292985228c',
      '5f092ba3-70b4-409a-a153-a698a3bd41ed',
      NULL,
      '077ddf22-2ce5-4088-bf2e-250d6f6021fc',
@@ -224,6 +227,7 @@ VALUES
     (
      'How are you, Admin?',
      '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
+     '74bbfdef-f556-4845-9afc-88292985228c',
      '5f092ba3-70b4-409a-a153-a698a3bd41ed',
      NULL,
      '13b2bea7-4aed-4295-a347-de799bc520cd',
@@ -234,6 +238,7 @@ VALUES
     (
      'I''m fine!',
      '74bbfdef-f556-4845-9afc-88292985228c',
+     '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
      '5f092ba3-70b4-409a-a153-a698a3bd41ed',
      NULL,
      '7d164d7a-066e-4f4f-a15d-917cc56eb918',
