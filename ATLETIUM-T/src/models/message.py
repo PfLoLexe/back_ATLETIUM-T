@@ -1,4 +1,5 @@
 ﻿import datetime
+from dataclasses import field
 from typing import Optional
 from uuid import uuid4, UUID
 from sqlmodel import SQLModel, Field, Relationship
@@ -31,6 +32,6 @@ class Message(MessageWithFK, table=True):
         primary_key=True,
         nullable=False
     )
-    is_read: bool
-    read_date: Optional[datetime.datetime] = Field(nullable=True)
+    is_read: Optional[bool] = Field(default=False, nullable=False)
+    read_date: Optional[datetime.datetime] = Field(nullable=True, default_factory=datetime.datetime.now)
 

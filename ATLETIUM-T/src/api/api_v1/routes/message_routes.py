@@ -6,7 +6,9 @@ from sqlmodel import select
 from src.core.authentication.authentication import authentication_handler
 from src.core.db import app_db
 from src.models.message import Message
-from src.schemas.requests.message import DialogueMessagesListRequest
+from src.schemas.exceptions.common_exceptions import InternalServerErrorException
+from src.schemas.requests.message import DialogueMessagesListRequest, AddMessageRequest
+from src.schemas.responses.common_responses import ItemCreatedSuccessfully
 from src.schemas.responses.message import MessageResponse
 
 message_router = APIRouter()
@@ -44,3 +46,25 @@ def get_list_of_messages(
                 )
             )
     return messages
+
+
+@message_router.post("/add")
+def add_message(
+    message_to_add: AddMessageRequest,
+    session = Depends(app_db.get_session),
+    current_user_id = Depends(authentication_handler.current_user)
+):
+    try:
+        message = Message(
+            sender_user_id=current_user_id,
+            recipient_user_id=message_to_add.recipient_user_id,
+            dialogue_id=message_to_add.dialogue_id,
+            text=message_to_add.text,
+            send_date=message_to_add.send_date,
+        )
+        session.add(message)
+        session.commit()
+        return ItemCreatedSuccessfully
+    except Exception as e:
+        print(e)
+        return InternalServerErrorException
