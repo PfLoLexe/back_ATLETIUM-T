@@ -17,9 +17,9 @@ def login(data: AuthenticationRequest, session = Depends(app_db.get_session)) ->
         authentication_result.token_type
     )
 
-@auth_router.post("/users/me")
-def get_my_user(current_user_id = Depends(authentication_handler.current_user)):
-    return current_user_id
+# @auth_router.post("/users/me")
+# def get_my_user(current_user_id = Depends(authentication_handler.current_user)):
+#     return current_user_id
 
 
 @auth_router.post("/verify-pincode")

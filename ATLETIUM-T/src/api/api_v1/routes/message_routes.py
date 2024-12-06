@@ -5,6 +5,7 @@ from sqlmodel import select
 
 from src.core.authentication.authentication import authentication_handler
 from src.core.db import app_db
+from src.core.websockets import chat_connections_handler
 from src.models.message import Message
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.schemas.requests.message import DialogueMessagesListRequest, AddMessageRequest
@@ -64,6 +65,10 @@ def add_message(
         )
         session.add(message)
         session.commit()
+
+        chat_connections_handler.send_message(message, current_user_id)
+        chat_connections_handler.send_message(message, message_to_add.recipient_user_id)
+
         return ItemCreatedSuccessfully
     except Exception as e:
         print(e)

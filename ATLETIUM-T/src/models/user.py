@@ -12,6 +12,7 @@ class UserDefault(SQLModel):
     firstname: Optional[str] = Field(nullable=True)
     lastname: Optional[str] = Field(nullable=True)
     middle_name: Optional[str] = Field(nullable=True)
+    phone_number: str = Field(nullable=False)
 
 
 class UserPasswordDefault(UserDefault):

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from src.core.config import app_configuration
+from src.core.websockets import chat_connections_handler
 from src.core.db import app_db
 from src.api.api_v1.api import v1_api_routes
 
