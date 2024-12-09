@@ -25,4 +25,4 @@ v1_api_routes.include_router(train_specific_to_client_link_router, prefix="/trai
 v1_api_routes.include_router(dialogue_router, prefix="/dialogue")
 v1_api_routes.include_router(message_router, prefix="/message")
 v1_api_routes.include_router(user_router, prefix="/user")
-v1_api_routes.include_router(websocket_router, prefix="/websocket")
+v1_api_routes.include_router(websocket_router)

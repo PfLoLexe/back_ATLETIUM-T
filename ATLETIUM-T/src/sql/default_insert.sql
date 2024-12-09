@@ -6,17 +6,20 @@
 	role,
 	hashed_password,
 	id,
+    phone_number,
 	is_active
 )
 VALUES
 	('admin', NULL, NULL, NULL, 'admin',
 		'$2b$12$uD5GmGwZt/adbsvdU/xAvuX1e2UkhqNywMJKOtdO3rZstRHcq2ALS',
 		'74bbfdef-f556-4845-9afc-88292985228c',
+	    'gfdh',
 		true
 	),
 	('user', 'Иванонов', 'Иван', 'Иванович', 'trainer',
 		'$2b$12$uD5GmGwZt/adbsvdU/xAvuOot/.8/lSn6Wn4BtZ/PfZswzpt6zx12',
 		'5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
+	    'gfdh',
 		true
 	);
 
