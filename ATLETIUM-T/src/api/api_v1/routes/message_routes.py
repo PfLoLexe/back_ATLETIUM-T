@@ -50,7 +50,7 @@ def get_list_of_messages(
 
 
 @message_router.post("/add")
-def add_message(
+async def add_message(
     message_to_add: AddMessageRequest,
     session = Depends(app_db.get_session),
     current_user_id = Depends(authentication_handler.current_user)
@@ -66,8 +66,7 @@ def add_message(
         session.add(message)
         session.commit()
 
-        chat_connections_handler.send_message(message, current_user_id)
-        chat_connections_handler.send_message(message, message_to_add.recipient_user_id)
+        await chat_connections_handler.send_message(message, message_to_add.recipient_user_id)
 
         return ItemCreatedSuccessfully
     except Exception as e:

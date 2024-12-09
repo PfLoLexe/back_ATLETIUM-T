@@ -5,7 +5,6 @@ from fastapi import APIRouter
 from fastapi import WebSocket, WebSocketDisconnect
 
 from src.core.websockets import chat_connections_handler
-from src.schemas.requests.websocket import ChatWebSocketConnectionRequest
 
 websocket_router = APIRouter()
 
