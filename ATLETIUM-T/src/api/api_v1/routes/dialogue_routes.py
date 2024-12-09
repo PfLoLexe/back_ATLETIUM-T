@@ -40,7 +40,7 @@ def get_dialogues_list(session = Depends(app_db.get_session), current_user_id = 
         dialogues_raw = session.exec(
             select(
                 User.firstname.label("recipient_user_firstname"),
-                User.firstname.label("recipient_user_lastname"),
+                User.lastname.label("recipient_user_lastname"),
                 User.middle_name.label("recipient_user_middle_name"),
                 Dialogue.id.label("dialogue_id"),
                 Dialogue.first_user_id.label("first_user_id"),

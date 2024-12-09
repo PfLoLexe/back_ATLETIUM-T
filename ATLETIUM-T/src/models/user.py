@@ -16,7 +16,7 @@ class UserDefault(SQLModel):
 
 
 class UserPasswordDefault(UserDefault):
-    hashed_password: str
+    hashed_password: str = Field(nullable=False)
 
 class User(UserPasswordDefault, table=True):
     id: UUID = Field(
