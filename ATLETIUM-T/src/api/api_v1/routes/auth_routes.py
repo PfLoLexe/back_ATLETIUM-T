@@ -1,4 +1,6 @@
-﻿from fastapi import APIRouter, Depends
+﻿from uuid import UUID
+
+from fastapi import APIRouter, Depends
 
 from src.core.authentication.authentication import authentication_handler
 from src.core.db import app_db
@@ -17,9 +19,9 @@ def login(data: AuthenticationRequest, session = Depends(app_db.get_session)) ->
         authentication_result.token_type
     )
 
-# @auth_router.post("/users/me")
-# def get_my_user(current_user_id = Depends(authentication_handler.current_user)):
-#     return current_user_id
+@auth_router.get("/get-current-user-uuid")
+def get_my_user(current_user_id = Depends(authentication_handler.current_user)) -> UUID:
+    return current_user_id
 
 
 @auth_router.post("/verify-pincode")
