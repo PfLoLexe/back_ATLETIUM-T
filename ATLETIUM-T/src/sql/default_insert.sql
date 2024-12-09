@@ -10,7 +10,7 @@
 	is_active
 )
 VALUES
-	('admin', NULL, NULL, NULL, 'admin',
+	('admin', 'Владимир', 'Ель', NULL, 'admin',
 		'$2b$12$uD5GmGwZt/adbsvdU/xAvuX1e2UkhqNywMJKOtdO3rZstRHcq2ALS',
 		'74bbfdef-f556-4845-9afc-88292985228c',
 	    'gfdh',
