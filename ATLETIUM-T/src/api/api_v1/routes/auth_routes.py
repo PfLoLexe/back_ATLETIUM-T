@@ -30,3 +30,8 @@ def verify_pincode(pincode: VeryPincodeRequest, session = Depends(app_db.get_ses
     if not verify_result:
         raise UnauthorizedExceptionWrongPincode
     return ValidPincodeResponse(message="Pincode verified")
+
+
+@auth_router.post("/register-user")
+def register_user():
+    pass

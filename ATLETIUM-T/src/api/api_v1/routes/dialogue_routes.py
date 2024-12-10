@@ -100,6 +100,8 @@ def get_possible_dialogue_list(
             exist_dialogues_current_user_is_first
         )
 
+        print("!!!!!!!!!! ", exist_dialogues_summary)
+
         possible_dialogues_raw = session.exec(
             select(
                 User.firstname.label("recipient_user_firstname"),
@@ -116,12 +118,20 @@ def get_possible_dialogue_list(
         possible_dialogues: List[PossibleDialoguesUserResponse] = []
         if possible_dialogues_raw is not None:
             for row in possible_dialogues_raw:
-                possible_dialogue = PossibleDialoguesUserResponse(
-                    recipient_user_firstname = "NoName" if row.recipient_user_firstname is None else row.recipient_user_firstname,
-                    recipient_user_lastname = "" if row.recipient_user_lastname is None else row.recipient_user_lastname,
-                    recipient_user_middle_name = "" if row.recipient_user_middle_name is None else row.recipient_user_middle_name,
-                    recipient_user_id=row.recipient_user_id,
-                )
+                if(row.recipient_user_id == current_user_id):
+                    possible_dialogue = PossibleDialoguesUserResponse(
+                        recipient_user_firstname="Избранное",
+                        recipient_user_lastname="",
+                        recipient_user_middle_name="",
+                        recipient_user_id=row.recipient_user_id,
+                    )
+                else:
+                    possible_dialogue = PossibleDialoguesUserResponse(
+                        recipient_user_firstname = "NoName" if row.recipient_user_firstname is None else row.recipient_user_firstname,
+                        recipient_user_lastname = "" if row.recipient_user_lastname is None else row.recipient_user_lastname,
+                        recipient_user_middle_name = "" if row.recipient_user_middle_name is None else row.recipient_user_middle_name,
+                        recipient_user_id=row.recipient_user_id,
+                    )
                 possible_dialogues.append(possible_dialogue)
         return possible_dialogues
     except Exception as e:
