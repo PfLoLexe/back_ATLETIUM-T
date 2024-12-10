@@ -29,7 +29,9 @@ def post_add_dialogue(data: DialogueCreationRequest, session = Depends(app_db.ge
         )
         session.add(dialogue)
         session.commit()
-        return ItemCreatedSuccessfully
+        response = ItemCreatedSuccessfully
+        response.body["dialogue_id"] = dialogue.id
+        return response
     except Exception as e:
         print(e)
         return InternalServerErrorException
