@@ -31,3 +31,9 @@ class PossibleDialoguesUserResponse(SQLModel):
         self.recipient_user_lastname = recipient_user_lastname
         self.recipient_user_middle_name = recipient_user_middle_name
         self.recipient_user_id = recipient_user_id
+
+class DialogueCreatedResponse(SQLModel):
+    dialogue_id: UUID
+
+    def __init__(self, dialogue_id):
+        self.dialogue_id = dialogue_id

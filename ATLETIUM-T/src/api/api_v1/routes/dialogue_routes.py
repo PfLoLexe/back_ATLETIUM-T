@@ -1,4 +1,5 @@
 ﻿import uuid
+from http.client import responses
 from typing import List
 
 from fastapi import Depends, APIRouter
@@ -15,12 +16,16 @@ from src.models.user import User
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.schemas.requests.dialogue import DialogueCreationRequest, PossibleDialogueListRequest
 from src.schemas.responses.common_responses import ItemCreatedSuccessfully
-from src.schemas.responses.dialogue import DialogueResponse, PossibleDialoguesUserResponse
+from src.schemas.responses.dialogue import DialogueResponse, PossibleDialoguesUserResponse, DialogueCreatedResponse
 
 dialogue_router = APIRouter()
 
 @dialogue_router.post("/add")
-def post_add_dialogue(data: DialogueCreationRequest, session = Depends(app_db.get_session), current_user_id = Depends(authentication_handler.current_user)) -> JSONResponse:
+def post_add_dialogue(
+        data: DialogueCreationRequest,
+        session = Depends(app_db.get_session),
+        current_user_id = Depends(authentication_handler.current_user)
+) -> DialogueCreatedResponse:
     try:
         dialogue = Dialogue(
             id = uuid.uuid4(),
@@ -29,9 +34,7 @@ def post_add_dialogue(data: DialogueCreationRequest, session = Depends(app_db.ge
         )
         session.add(dialogue)
         session.commit()
-        response = ItemCreatedSuccessfully
-        response.body["dialogue_id"] = dialogue.id
-        return response
+        return DialogueCreatedResponse(dialogue_id=dialogue.id)
     except Exception as e:
         print(e)
         return InternalServerErrorException
