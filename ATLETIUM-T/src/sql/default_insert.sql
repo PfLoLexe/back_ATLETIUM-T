@@ -21,7 +21,14 @@ VALUES
 		'5c5d9856-6a9e-432d-9e5d-2d0ee07b9614',
 	    'gfdh',
 		true
+	),
+    	('user2', 'Иванонов2', 'Иван2', 'Иванович2', 'trainer',
+		'$2b$12$uD5GmGwZt/adbsvdU/xAvuOot/.8/lSn6Wn4BtZ/PfZswzpt6zx12',
+		'b1c40098-78ef-4af9-9cf8-6da820fdc5b4',
+	    'phone_humber',
+		true
 	);
+
 
 INSERT INTO public.pincode(
 	id,
@@ -38,6 +45,11 @@ VALUES
      'a851abe9-16dc-4efd-a3e2-843a57bfa0d6',
      '$2b$12$NpA38wo6r6O/6xlxv0pLK.IoBufuAI2giawjGtWtJfTxRJuqkzjqi',
      '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
+    ),
+    (
+     'c2aa8912-88f0-464f-927d-4ffc44d33892',
+     '$2b$12$NpA38wo6r6O/6xlxv0pLK.IoBufuAI2giawjGtWtJfTxRJuqkzjqi',
+     'b1c40098-78ef-4af9-9cf8-6da820fdc5b4'
     );
 
 INSERT INTO place(name, id)
