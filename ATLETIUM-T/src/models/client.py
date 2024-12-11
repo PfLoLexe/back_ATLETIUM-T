@@ -13,11 +13,17 @@ class ClientDefault(SQLModel):
     middle_name: Optional[str] = Field(nullable=True)
     phone_number: Optional[str] = Field(nullable=True)
     age: Optional[int] = Field(nullable=True)
+
+
+class ClientParentInfo(ClientDefault):
     parent_phone_number: Optional[str] = Field(nullable=True)
+    parent_firstname: Optional[str] = Field(nullable=True)
+    parent_lastname: Optional[str] = Field(nullable=True)
+    parent_middle_name: Optional[str] = Field(nullable=True)
+
+
+class Client(ClientParentInfo, table=True):
     is_parent: bool
-
-
-class Client(ClientDefault, table=True):
     id: UUID = Field(
         default_factory=uuid4,
         primary_key=True,

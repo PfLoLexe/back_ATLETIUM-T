@@ -3,6 +3,7 @@
 from src.api.api_v1.routes import train_main_routes
 from src.api.api_v1.routes.auth_routes import auth_router
 from src.api.api_v1.routes.auxiliary_test_routes import auxiliary_test_routes
+from src.api.api_v1.routes.client_routes import client_router
 from src.api.api_v1.routes.dialogue_routes import dialogue_router
 from src.api.api_v1.routes.message_routes import message_router
 from src.api.api_v1.routes.place_routes import place_router
@@ -26,3 +27,4 @@ v1_api_routes.include_router(dialogue_router, prefix="/dialogue")
 v1_api_routes.include_router(message_router, prefix="/message")
 v1_api_routes.include_router(user_router, prefix="/user")
 v1_api_routes.include_router(websocket_router)
+v1_api_routes.include_router(client_router, prefix="/client")

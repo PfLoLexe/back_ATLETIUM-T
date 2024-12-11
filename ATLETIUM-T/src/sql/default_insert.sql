@@ -142,27 +142,36 @@ INSERT INTO client(
     age,
     parent_phone_number,
     is_parent,
-    id)
+    id,
+    parent_firstname,
+    parent_lastname,
+    parent_middle_name)
 VALUES
     (
      'Александр',
      'Александров',
      'Александрович',
      '+7idinahoi45',
-     NULL,
+     22,
      NULL,
      FALSE,
-     '6f793564-ce9d-417e-b5df-6324eca497d0'
+     '6f793564-ce9d-417e-b5df-6324eca497d0',
+     NULL,
+     NULL,
+     NULL
     ),
     (
      'Анастасия',
      'Анастасьевна',
      'Александровна',
      '+79995556545',
-     NULL,
+     34,
      NULL,
      TRUE,
-     '82f2d1f9-3681-4d72-b3cf-4589a62d4631'
+     '82f2d1f9-3681-4d72-b3cf-4589a62d4631',
+     NULL,
+     NULL,
+     NULL
     ),
     (
      'Евгений',
@@ -172,7 +181,10 @@ VALUES
      17,
      '+79995556545',
      FALSE,
-     '26e49df1-ed81-48de-9ed6-604a32b5f4cf'
+     '26e49df1-ed81-48de-9ed6-604a32b5f4cf',
+     'Анатолий',
+     'Анкиражев',
+     NULL
     ),
     (
      'Яна',
@@ -180,9 +192,12 @@ VALUES
      'Романовна',
      '+76665559945',
      17,
-     NULL,
+     '+79995556545',
      FALSE,
-     '91b6a9fa-b306-4b81-9006-203cc787518f'
+     '91b6a9fa-b306-4b81-9006-203cc787518f',
+     'Антонина',
+     'Павлова',
+     'Анатольевна'
     ),
     (
      'Максимильян',
@@ -192,7 +207,10 @@ VALUES
      39,
      NULL,
      FALSE,
-     '6f75c0bc-7ae1-46c3-b0f8-1589fc11d5cf'
+     '6f75c0bc-7ae1-46c3-b0f8-1589fc11d5cf',
+     NULL,
+     NULL,
+     NULL
     );
 
 INSERT INTO dialogue(
