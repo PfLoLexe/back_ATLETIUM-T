@@ -8,7 +8,7 @@ from src.schemas.exceptions.common_exceptions import InternalServerErrorExceptio
 from src.models.place import PlaceDefault, PLace
 from src.schemas.responses.common_responses import ItemCreatedSuccessfully
 
-place_router = APIRouter()
+place_router = APIRouter(prefix="/place")
 
 @place_router.post("/add")
 def post_add_place(place: PlaceDefault, session = Depends(app_db.get_session)) -> JSONResponse:

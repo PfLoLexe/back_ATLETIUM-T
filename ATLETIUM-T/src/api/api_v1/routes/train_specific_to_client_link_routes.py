@@ -9,7 +9,7 @@ from src.models.train_specific_to_client_link import TrainSpecificToClientLink
 from src.schemas.requests.train_specific_to_client_link import TrainSpecificChangeClientsVisitStatusRequest
 from src.schemas.responses.common_responses import ItemUpdatedSuccessfully
 
-train_specific_to_client_link_router = APIRouter()
+train_specific_to_client_link_router = APIRouter(prefix="/train-specific-to-client-link")
 
 @train_specific_to_client_link_router.put("/update-status")
 def put_train_specific_to_client_link(

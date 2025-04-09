@@ -19,17 +19,20 @@ class Config:
     def load_configuration(self):
         load_dotenv()
 
-        self.db_url = os.getenv("DB_URL")
+        environment = os.getenv("ENVIRONMENT")
 
-        self.username_salt = os.getenv("USERNAME_SALT")
-        self.password_salt = os.getenv("PASSWORD_SALT")
-        self.pincode_salt = os.getenv("PINCODE_SALT")
+        self.db_url = os.getenv(environment + "_DB_URL")
 
-        self.jwt_token_type = os.getenv("JWT_TOKEN_TYPE")
-        self.access_token_expire_time_long = os.getenv("ACCESS_TOKEN_LONG_EXPIRE_TIME")
-        self.access_token_expire_time_standard = os.getenv("ACCESS_TOKEN_STANDARD_EXPIRE_TIME")
-        self.jwt_secret_key = os.getenv("SECRET_KEY")
-        self.jwt_algorithm = os.getenv("JWT_TOKEN_GENERATION_ALGORITHM")
-        self.jwt_token_expire_time_string_format = os.getenv("JWT_TOKEN_EXPIRE_TIME_STRING_FORMAT")
+        self.username_salt = os.getenv(environment + "_USERNAME_SALT")
+        self.password_salt = os.getenv(environment + "_PASSWORD_SALT")
+        self.pincode_salt = os.getenv(environment + "_PINCODE_SALT")
+
+        self.jwt_token_type = os.getenv(environment + "_JWT_TOKEN_TYPE")
+        self.access_token_expire_time_long = os.getenv(environment + "_ACCESS_TOKEN_LONG_EXPIRE_TIME")
+        self.access_token_expire_time_standard = os.getenv(environment + "_ACCESS_TOKEN_STANDARD_EXPIRE_TIME")
+        self.jwt_secret_key = os.getenv(environment + "_SECRET_KEY")
+        self.jwt_algorithm = os.getenv(environment + "_JWT_TOKEN_GENERATION_ALGORITHM")
+        self.jwt_token_expire_time_string_format = os.getenv(environment + "_JWT_TOKEN_EXPIRE_TIME_STRING_FORMAT")
+
 
 app_configuration: Config = Config()

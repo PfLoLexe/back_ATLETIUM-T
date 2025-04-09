@@ -1,4 +1,6 @@
-﻿from sqlmodel import SQLModel, Field
+﻿from uuid import UUID
+
+from sqlmodel import SQLModel, Field
 
 from src.models.role import Roles
 
@@ -9,7 +11,7 @@ class AuthenticationRequest(SQLModel):
 
 class TokenRequest(SQLModel):
     username: str
-    hashed_password: str
+    user_id: UUID
     role: Roles
 
 class VeryPincodeRequest(SQLModel):

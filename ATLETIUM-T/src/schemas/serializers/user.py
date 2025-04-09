@@ -23,7 +23,7 @@ class UserAuthenticationSerializer:
     role: Optional[Roles]
     def __init__(
         self,
-        username: str, hashed_password: str,
+        username: Optional[str] = None, hashed_password: Optional[str] = None,
         is_active: Optional[bool] = None,
         user_id: Optional[UUID] = None,
         role: Optional[Roles] = None

@@ -29,7 +29,6 @@ VALUES
 		true
 	);
 
-
 INSERT INTO public.pincode(
 	id,
     hashed_pincode,

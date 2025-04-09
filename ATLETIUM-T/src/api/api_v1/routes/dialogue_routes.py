@@ -18,7 +18,7 @@ from src.schemas.requests.dialogue import DialogueCreationRequest, PossibleDialo
 from src.schemas.responses.common_responses import ItemCreatedSuccessfully
 from src.schemas.responses.dialogue import DialogueResponse, PossibleDialoguesUserResponse, DialogueCreatedResponse
 
-dialogue_router = APIRouter()
+dialogue_router = APIRouter(prefix="/dialogue")
 
 @dialogue_router.post("/add")
 def post_add_dialogue(

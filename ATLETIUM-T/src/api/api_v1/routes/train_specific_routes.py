@@ -14,7 +14,7 @@ from src.services.clients.clients_to_train_link import get_short_clients_of_trai
 from src.utils.sql.sql_query import SqlQuery
 from src.services.trains.train_main_to_specific import generate_train_specific
 
-train_specific_router = APIRouter()
+train_specific_router = APIRouter(prefix="/train-specific")
 sql_query = SqlQuery()
 
 @train_specific_router.post("/get")

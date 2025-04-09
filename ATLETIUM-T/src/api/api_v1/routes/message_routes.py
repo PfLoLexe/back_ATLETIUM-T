@@ -12,7 +12,7 @@ from src.schemas.requests.message import DialogueMessagesListRequest, AddMessage
 from src.schemas.responses.common_responses import ItemCreatedSuccessfully
 from src.schemas.responses.message import MessageResponse
 
-message_router = APIRouter()
+message_router = APIRouter(prefix="/message")
 
 @message_router.post("/get_list")
 def get_list_of_messages(

@@ -8,6 +8,7 @@ from sqlmodel import select, Session
 
 from src.core.db import app_db
 from src.models.pincode import Pincode
+from src.models.role import Roles
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException, UnauthorizedException
 from src.models.user import User
 from src.schemas.requests.auth_request_models import AuthenticationRequest, TokenRequest
@@ -25,14 +26,13 @@ class Authentication:
     def check_password(self, password: str, hashed_password: str) -> bool:
         return bcrypt.checkpw(password.encode(), hashed_password.encode())
 
-    def get_user(self, session, username: str, hashed_password: str) -> UserAuthenticationSerializer:
+    def get_user_by_usname_pass(self, session, username: str, hashed_password: str) -> UserAuthenticationSerializer:
         try:
             user = session.exec(
                 select(
                     User.id,
                     User.role,
                     User.username,
-                    User.hashed_password,
                     User.is_active,
                 ).where(
                     User.username == username,
@@ -45,7 +45,29 @@ class Authentication:
                 user_id=user.id,
                 role=user.role,
                 username=user.username,
-                hashed_password=user.hashed_password,
+                is_active=user.is_active
+            )
+        except Exception as e:
+            print(e)
+            raise InternalServerErrorException
+
+
+    def get_user_by_username_role_id(self, session, username: str, role: Roles, user_id: UUID) -> Optional[UserAuthenticationSerializer]:
+        try:
+            user = session.exec(
+                select(
+                    User.id,
+                    User.is_active,
+                ).where(
+                    User.username == username,
+                    User.id == user_id,
+                    User.role == role,
+                )
+            ).first()
+            if user is None:
+                return None
+            return UserAuthenticationSerializer(
+                user_id=user.id,
                 is_active=user.is_active
             )
         except Exception as e:
@@ -54,7 +76,7 @@ class Authentication:
 
 
     def authenticate(self, session: Session, auth_data: AuthenticationRequest) -> TokenModel:
-        user = self.get_user(
+        user = self.get_user_by_usname_pass(
             session,
             username=auth_data.username,
             hashed_password=Hasher.get_password_hash(
@@ -64,19 +86,25 @@ class Authentication:
         )
         if not user or user.is_active is False:
             raise UnauthorizedException
+
         return self.token.create_access_token(
             TokenRequest(
                 username=user.username,
-                hashed_password=user.hashed_password,
+                user_id=user.user_id,
                 role=user.role
             )
         )
 
     def current_user(self, session: Session = Depends(app_db.get_session), token: str = Depends(oauth2_scheme)) -> Optional[UUID]:
         user_auth_data = self.token.decode_token(TokenModel(access_token=token))
-        if not user_auth_data or user_auth_data.username is None or user_auth_data.hashed_password is None:
+        if not user_auth_data or user_auth_data.username is None or user_auth_data.user_id is None:
             raise UnauthorizedException
-        user = self.get_user(session, user_auth_data.username, user_auth_data.hashed_password)
+        user = self.get_user_by_username_role_id(
+            session,
+            username=user_auth_data.username,
+            role=user_auth_data.role,
+            user_id=user_auth_data.user_id
+        )
 
         if not user or user.is_active is False:
             raise UnauthorizedException

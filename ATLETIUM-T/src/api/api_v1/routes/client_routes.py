@@ -8,7 +8,7 @@ from src.schemas.requests.client import ClientProfileInfoRequest
 from src.schemas.responses.client import ClientProfileInfoResponse, ClientParentInfoResponse
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 
-client_router = APIRouter()
+client_router = APIRouter(prefix="/client")
 
 @client_router.post('/get-info')
 def get_client_profile_info(

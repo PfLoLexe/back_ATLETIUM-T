@@ -14,7 +14,7 @@ from src.models.train_main import TrainMain
 from src.schemas.requests.train_main import TrainMainListRequest
 from src.schemas.responses.train_main import TrainMainListItemResponse
 
-train_main_router = APIRouter()
+train_main_router = APIRouter(prefix="/train-main")
 
 @train_main_router.post("/get-list/by-week-day-number")
 def get_list_of_main_trains(data: TrainMainListRequest,

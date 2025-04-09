@@ -8,7 +8,7 @@ from src.schemas.exceptions.common_exceptions import InternalServerErrorExceptio
 from src.models.train_type import TrainTypeDefault, TrainType
 from src.schemas.responses.common_responses import ItemCreatedSuccessfully
 
-train_type_router = APIRouter()
+train_type_router = APIRouter(prefix="/train-type")
 
 @train_type_router.post("/add")
 def post_add_train_type(train_type: TrainTypeDefault, session = Depends(app_db.get_session)) -> JSONResponse:

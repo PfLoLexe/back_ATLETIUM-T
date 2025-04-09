@@ -1,5 +1,6 @@
 ﻿import os
 from datetime import datetime, timedelta, timezone
+from uuid import UUID
 
 import jwt
 from sqlmodel import SQLModel
@@ -34,7 +35,8 @@ class Token():
         expire_time = self.get_expire_time(role=token_request.role)
         data: dict = {
             "sub": token_request.username,
-            "pass": token_request.hashed_password,
+            "id": str(token_request.user_id),
+            "role": token_request.role.value,
             "expire": expire_time
         }
         encoded_jwt = jwt.encode(data, app_configuration.jwt_secret_key, algorithm=app_configuration.jwt_algorithm)
@@ -44,15 +46,17 @@ class Token():
     def decode_token(self, token: TokenModel) -> Optional[UserAuthenticationSerializer]:
         try:
             payload = jwt.decode(token.access_token, app_configuration.jwt_secret_key, algorithms=[app_configuration.jwt_algorithm])
-            username: str = payload.get("sub")
-            password: str = payload.get("pass")
 
+            username: str = payload.get("sub")
+            user_id: UUID = UUID(payload.get("id"))
+            user_role: Roles = Roles(payload.get("role"))
             expire: str = payload.get("expire")
+
             expire_time = datetime.fromtimestamp(expire, tz=timezone.utc)
+
             if (not expire) or (expire_time < datetime.now(timezone.utc)):
                 return None
-
-            return UserAuthenticationSerializer(username=username, hashed_password=password)
+            return UserAuthenticationSerializer(username=username, user_id=user_id, role=user_role)
         except Exception as e:
             print(e)
             return None

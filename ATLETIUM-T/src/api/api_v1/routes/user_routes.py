@@ -8,7 +8,7 @@ from src.schemas.exceptions.common_exceptions import InternalServerErrorExceptio
 from src.schemas.requests.user import TrainerProfileInfoRequest
 from src.schemas.responses.user import TrainerInfoResponse
 
-user_router = APIRouter()
+user_router = APIRouter(prefix="/user")
 
 @user_router.get("/me")
 def get_my_info(session = Depends(app_db.get_session), current_user_id = Depends(authentication_handler.current_user)) -> TrainerInfoResponse:
