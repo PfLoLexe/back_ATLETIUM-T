@@ -40,7 +40,7 @@ target_metadata = SQLModel.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 load_dotenv()
-config.set_main_option('sqlalchemy.url', os.getenv("DB_URL"))
+config.set_main_option('sqlalchemy.url', os.getenv("RELEASE_DB_URL"))
 
 
 def run_migrations_offline() -> None:

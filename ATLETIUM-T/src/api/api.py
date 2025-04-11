@@ -13,16 +13,20 @@ from src.api.api_v1.routes.train_type_routes import train_type_router
 from src.api.api_v1.routes.user_routes import user_router
 from src.api.api_v1.routes.websocket_routes import websocket_router
 
+#Создание общего маршрутизатора
 api_routes = APIRouter()
 
+# Подключение маршрутизаторов групп, с дополнительным префиксом,
+# обозначающим, что это эндпоинты первой версии.
+# Если будет создана вторая версия эндпоинта,
+# ее можно будет подключить как вместо, так и наравне с первой
 api_routes.include_router(auth_router, prefix="/v1")
-
 api_routes.include_router(auxiliary_test_routes, prefix="/v1")
-
 api_routes.include_router(place_router, prefix="/v1")
-
 api_routes.include_router(train_main_router, prefix="/v1")
-
+# ...
+# Подключение других роутеров
+# ...
 api_routes.include_router(train_specific_router, prefix="/v1")
 
 api_routes.include_router(train_type_router, prefix="/v1")

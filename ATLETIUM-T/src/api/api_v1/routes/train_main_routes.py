@@ -24,6 +24,8 @@ def get_list_of_main_trains(data: TrainMainListRequest,
     try:
         result = session.exec(
             select(
+                # Запрашиваются не все поля таблицы
+                # А каждому из запрошенных присвоего соответсвующее имя
                 TrainMain.id.label("id"),
                 TrainMain.name.label("name"),
                 TrainMain.start_time.label("start_time"),
@@ -41,6 +43,8 @@ def get_list_of_main_trains(data: TrainMainListRequest,
             )
         )
         if result is not None:
+            # Благодаря тому, что при запросе данных имена полей были изменены
+            # Можно очень легко преобразовать ответ БД в понятную форму ответа
             trains = [TrainMainListItemResponse(**row) for row in result.mappings()]
             return trains
         else:
