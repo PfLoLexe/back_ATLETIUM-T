@@ -66,7 +66,8 @@ async def add_message(
         session.add(message)
         session.commit()
 
-        await chat_connections_handler.send_message(message, message_to_add.recipient_user_id)
+        if message_to_add.recipient_user_id != current_user_id:
+            await chat_connections_handler.send_message(message, message_to_add.recipient_user_id)
 
         return ItemCreatedSuccessfully
     except Exception as e:
