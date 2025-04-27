@@ -34,12 +34,16 @@ def get_list_of_main_trains(data: TrainMainListRequest,
                 TrainType.name.label("type_name"),
                 TrainMain.date.label("date"),
 
-            ).where(
+            )
+            .where(
                 TrainMain.week_day_number == data.week_day_number,
                 or_(TrainMain.date == None, TrainMain.date == data.date),
                 TrainMain.place_id == PLace.id,
                 TrainMain.trainer_id == current_user_id,
                 TrainMain.train_type_id == TrainType.id,
+            )
+            .order_by(
+                TrainMain.start_time
             )
         )
         if result is not None:

@@ -7,15 +7,15 @@ from sqlmodel import SQLModel, Field, Relationship
 from src.models.role import Roles
 
 
-class ClientDefault(SQLModel):
-    firstname: str
-    lastname: str
-    middle_name: Optional[str] = Field(nullable=True)
+class ClientParentInfoDefault(SQLModel):
     phone_number: Optional[str] = Field(nullable=True)
-    age: Optional[int] = Field(nullable=True)
+    firstname: Optional[str] = Field(nullable=True)
+    lastname: Optional[str] = Field(nullable=True)
+    middle_name: Optional[str] = Field(nullable=True)
 
-class Client(ClientDefault, table=True):
-    is_parent: bool
+
+class ClientParentInfo(ClientParentInfoDefault, table=True):
+    __tablename__: str = "client_parent_info"
     id: UUID = Field(
         default_factory=uuid4,
         primary_key=True,

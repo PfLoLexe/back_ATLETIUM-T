@@ -23,7 +23,7 @@ VALUES
 		true
 	),
     	('user2', 'Иванонов2', 'Иван2', 'Иванович2', 'trainer',
-		'$2b$12$uD5GmGwZt/adbsvdU/xAvuOot/.8/lSn6Wn4BtZ/PfZswzpt6zx12',
+		'$2b$12$uD5GmGwZt/adbsvdU/xAvuj6rNJA2MUfZwBeccVzPD7FPKkqSLoxy',
 		'b1c40098-78ef-4af9-9cf8-6da820fdc5b4',
 	    'phone_humber',
 		true
@@ -63,56 +63,27 @@ VALUES
 	('Personal', '751bf1ed-6a88-4e16-8e7c-1496821c50dd');
 
 INSERT INTO train_main(
-	name,
-	place_id,
-	train_type_id,
-	start_time,
-	end_time,
-	week_day_number,
-    "date",
-	id,
-    trainer_id)
+    name,
+    start_time,
+    end_time,
+    week_day_number,
+    date,
+    place_id,
+    train_type_id,
+    trainer_id,
+    id
+)
 VALUES
-	(
-	 'Плавание 10+',
-	 '66c2ae22-3efb-454a-a2f3-1ae9133a575d',
-	 '47d9badb-dcda-49c9-9088-9e2606992b55',
-	 '11:30:00.343', '13:00:00.343', 1, NULL,
-	 '41e5c441-16b4-4c98-a3a7-7bd32589e048',
-	 '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
-    ),
-	(
-	 'Функциональный фитнес',
-	 'e21622ef-105a-4d2e-85b1-43fc8df4c90e',
-	 '47d9badb-dcda-49c9-9088-9e2606992b55',
-	 '11:30:00.343', '13:00:00.343', 1, NULL,
-	 'd6ab1705-4e24-4e0e-bb42-eba1def3cfd3',
-	 '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
-	 ),
-	(
-	 'Бокс',
-	 '5707ca28-8715-4a6a-a1e6-37bbbcaa9b0e',
-	 '47d9badb-dcda-49c9-9088-9e2606992b55',
-	 '11:30:00.343', '13:00:00.343', 3, NULL,
-	 '54626715-00a1-463e-9f64-6f5d3b160d2d',
-	 '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
-    ),
-	(
-	 'Фитнес',
-	 'e21622ef-105a-4d2e-85b1-43fc8df4c90e',
-	 '751bf1ed-6a88-4e16-8e7c-1496821c50dd',
-	 '11:30:00.343', '13:00:00.343', 4, NULL,
-	 '1b0f1ae3-7d52-4bc8-b26a-ae90b903cee0',
-	 '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
-	),
-	(
-	 'Плавание 6+',
-	 '66c2ae22-3efb-454a-a2f3-1ae9133a575d',
-	 '751bf1ed-6a88-4e16-8e7c-1496821c50dd',
-	 '11:30:00.343', '13:00:00.343', 5, '31.10.24',
-	 '38b40437-0541-44ed-871a-f1a04fba179b',
-	 '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614'
-    );
+	('Фитнес', '11:30:00', '13:00:00', 3, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '1b0f1ae3-7d52-4bc8-b26a-ae90b903cee0'),
+    ('Фитнес', '11:30:00', '11:30:00', 1, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', 'b59eaac5-2f94-4653-8b61-f3de392eaecc'),
+    ('Фитнес', '11:30:00', '11:30:00', 3, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', 'bd35454b-6d58-4020-93e7-6d8c1fa76f7f'),
+    ('Фитнес', '11:30:00', '11:30:00', 3, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '8ccb54b8-0469-4313-830f-2528cc9c421e'),
+    ('Функциональный фитнес', '14:45:00', '15:45:00', 1, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '47d9badb-dcda-49c9-9088-9e2606992b55', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', 'd6ab1705-4e24-4e0e-bb42-eba1def3cfd3'),
+    ('Плавание 6+', '10:00:00', '11:00:00', 6, '2025-04-28', '66c2ae22-3efb-454a-a2f3-1ae9133a575d', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '38b40437-0541-44ed-871a-f1a04fba179b'),
+    ('Фитнес', '11:30:00', '11:30:00', 1, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '0938bd36-48ed-4e29-b352-9333a78892b5'),
+    ('Фитнес', '11:30:00', '11:30:00', 6, null, 'e21622ef-105a-4d2e-85b1-43fc8df4c90e', '751bf1ed-6a88-4e16-8e7c-1496821c50dd', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '950f9082-3be7-40e6-acc0-6da20127fac6'),
+    ('Бокс', '16:15:00', '17:00:00', 6, null, '5707ca28-8715-4a6a-a1e6-37bbbcaa9b0e', '47d9badb-dcda-49c9-9088-9e2606992b55', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '54626715-00a1-463e-9f64-6f5d3b160d2d'),
+    ('Плавание 10+', '13:30:00', '14:30:00', 6, null, '66c2ae22-3efb-454a-a2f3-1ae9133a575d', '47d9badb-dcda-49c9-9088-9e2606992b55', '5c5d9856-6a9e-432d-9e5d-2d0ee07b9614', '41e5c441-16b4-4c98-a3a7-7bd32589e048');
 
 INSERT INTO train_specific(
 	clients_amount,
@@ -139,12 +110,8 @@ INSERT INTO client(
     middle_name,
     phone_number,
     age,
-    parent_phone_number,
     is_parent,
-    id,
-    parent_firstname,
-    parent_lastname,
-    parent_middle_name)
+    id)
 VALUES
     (
      'Александр',
@@ -152,12 +119,8 @@ VALUES
      'Александрович',
      '+7idinahoi45',
      22,
-     NULL,
      FALSE,
-     '6f793564-ce9d-417e-b5df-6324eca497d0',
-     NULL,
-     NULL,
-     NULL
+     '6f793564-ce9d-417e-b5df-6324eca497d0'
     ),
     (
      'Анастасия',
@@ -165,12 +128,8 @@ VALUES
      'Александровна',
      '+79995556545',
      34,
-     NULL,
      TRUE,
-     '82f2d1f9-3681-4d72-b3cf-4589a62d4631',
-     NULL,
-     NULL,
-     NULL
+     '82f2d1f9-3681-4d72-b3cf-4589a62d4631'
     ),
     (
      'Евгений',
@@ -178,12 +137,8 @@ VALUES
      'Евгеньевич',
      '+78885554445',
      17,
-     '+79995556545',
      FALSE,
-     '26e49df1-ed81-48de-9ed6-604a32b5f4cf',
-     'Анатолий',
-     'Анкиражев',
-     NULL
+     '26e49df1-ed81-48de-9ed6-604a32b5f4cf'
     ),
     (
      'Яна',
@@ -191,12 +146,8 @@ VALUES
      'Романовна',
      '+76665559945',
      17,
-     '+79995556545',
      FALSE,
-     '91b6a9fa-b306-4b81-9006-203cc787518f',
-     'Антонина',
-     'Павлова',
-     'Анатольевна'
+     '91b6a9fa-b306-4b81-9006-203cc787518f'
     ),
     (
      'Максимильян',
@@ -204,12 +155,46 @@ VALUES
      'Ишакович',
      '+74445557645',
      39,
-     NULL,
      FALSE,
-     '6f75c0bc-7ae1-46c3-b0f8-1589fc11d5cf',
-     NULL,
-     NULL,
-     NULL
+     '6f75c0bc-7ae1-46c3-b0f8-1589fc11d5cf'
+    );
+
+INSERT INTO client_parent_info(
+	phone_number,
+    firstname,
+    lastname,
+    middle_name,
+    id)
+VALUES
+    (
+     '+79999999999',
+     'Акакий',
+     'Акакиевич',
+     'Акакьев',
+     '16b92894-4b3e-4c6d-a813-04974a157187'
+    ),
+    (
+     '+79999999999',
+     'Анатолий',
+     'Терентьев',
+     'Ольгович',
+     '530e010d-b60d-4f3a-ba0a-06c559fc9777'
+    );
+
+INSERT INTO parent_to_client_link(
+    parent_id,
+    client_id,
+    id)
+VALUES
+    (
+     '16b92894-4b3e-4c6d-a813-04974a157187',
+     '26e49df1-ed81-48de-9ed6-604a32b5f4cf',
+     'a801adb9-40d1-42cc-a953-89c15e60fc7a'
+    ),
+    (
+     '530e010d-b60d-4f3a-ba0a-06c559fc9777',
+     '91b6a9fa-b306-4b81-9006-203cc787518f',
+     'd369e27a-a566-4826-956a-39ecedd62c35'
     );
 
 INSERT INTO dialogue(
@@ -284,8 +269,5 @@ INSERT INTO train_main_to_client_link(
     client_id,
     id)
 VALUES
-    (
-     '41e5c441-16b4-4c98-a3a7-7bd32589e048',
-     '6f793564-ce9d-417e-b5df-6324eca497d0',
-     '659ab3e7-6eb1-49f0-916b-cc7dbbcde30d'
-    );
+    ('41e5c441-16b4-4c98-a3a7-7bd32589e048', '6f793564-ce9d-417e-b5df-6324eca497d0', '659ab3e7-6eb1-49f0-916b-cc7dbbcde30d'),
+    ('41e5c441-16b4-4c98-a3a7-7bd32589e048', '26e49df1-ed81-48de-9ed6-604a32b5f4cf', '5b57c98a-eab7-47e4-b61f-4dad8ed53614');

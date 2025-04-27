@@ -30,3 +30,9 @@ WHERE ID is not NULL;
 
 DELETE FROM pincode
 WHERE ID is not NULL;
+
+DELETE FROM parent_to_client_link
+WHERE ID is not NULL;
+
+DELETE FROM client_parent_info
+WHERE ID is not NULL;

@@ -6,9 +6,9 @@ from fastapi import WebSocket, WebSocketDisconnect
 
 from src.core.websockets import chat_connections_handler
 
-websocket_router = APIRouter()
+websocket_router = APIRouter(prefix="/websocket")
 
-@websocket_router.websocket('/ws/{user_id}')
+@websocket_router.websocket('/chat-connection/{user_id}')
 async def chat_websocket_connect(websocket: WebSocket, user_id: UUID):
     await chat_connections_handler.open_connection(
         connection=websocket,

@@ -19,6 +19,9 @@ from src.models.train_main_to_client_link import TrainMainToClientLink
 from src.models.train_specific_to_client_link import TrainSpecificToClientLink
 from src.models.client import Client
 from src.models.pincode import Pincode
+from src.models.parent_to_client_link import ParentToClientLink
+from src.models import client_parent_info
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

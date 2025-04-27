@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 
 from src.core.db import app_db
+from src.core.authentication.authentication import authentication_handler
 from src.models.train_main import TrainMain
 from src.schemas.exceptions.common_exceptions import InternalServerErrorException
 from src.models.train_specific import TrainSpecific
@@ -18,7 +19,9 @@ train_specific_router = APIRouter(prefix="/train-specific")
 sql_query = SqlQuery()
 
 @train_specific_router.post("/get")
-def get_specific_train(data: TrainSpecificRequest, session = Depends(app_db.get_session)) -> TrainSpecificDataResponse:
+def get_specific_train(data: TrainSpecificRequest,
+                       session = Depends(app_db.get_session),
+                       current_user_id = Depends(authentication_handler.current_user)) -> TrainSpecificDataResponse:
     try:
         train_specific_raw = session.exec(
             select(
