@@ -10,7 +10,7 @@ from src.models.train_main_to_client_link import TrainMainToClientLink
 from src.models.train_specific import TrainSpecific
 from src.models.train_specific_to_client_link import TrainSpecificToClientLink
 
-def generate_train_specific(session, train_main_id: UUID, train_specific_id: Optional[UUID] = None):
+def generate_train_specific(session, train_main_id: UUID, train_specific_id: Optional[UUID] = None, plane_date: Optional[date] = None) -> TrainSpecific:
     train_main = session.exec(
         select(
             TrainMain
@@ -46,7 +46,7 @@ def generate_train_specific(session, train_main_id: UUID, train_specific_id: Opt
         id=train_specific_id,
         trainer_id=train_main.trainer_id,
         description="",
-        date=date(datetime.now().year, datetime.now().month, datetime.now().day),
+        date=plane_date,
         is_over = False,
         clients_amount=len(train_clients),
     )

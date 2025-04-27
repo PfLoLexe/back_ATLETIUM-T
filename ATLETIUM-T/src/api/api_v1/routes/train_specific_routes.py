@@ -58,6 +58,7 @@ def get_specific_train(data: TrainSpecificRequest,
             generate_train_specific(
                 train_main_id=data.train_main_id,
                 train_specific_id=train_specific_uuid,
+                date=data.date,
                 session=session,
             )
             clients_list = get_short_clients_of_train_main(
