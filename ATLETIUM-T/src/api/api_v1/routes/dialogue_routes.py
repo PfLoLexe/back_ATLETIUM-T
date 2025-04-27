@@ -69,6 +69,10 @@ def get_dialogues_list(session = Depends(app_db.get_session), current_user_id = 
                     first_user_id = current_user_id,
                     second_user_id = row.second_user_id if row.first_user_id == current_user_id else row.first_user_id,
                 )
+                if dialogue.first_user_id == dialogue.second_user_id == current_user_id:
+                    dialogue.recipient_user_firstname = "Избранное"
+                    dialogue.recipient_user_lastname = ""
+                    dialogue.recipient_user_middle_name = ""
                 dialogues.append(dialogue)
         return dialogues
     except Exception as e:
@@ -104,8 +108,6 @@ def get_possible_dialogue_list(
             exist_dialogues_current_user_is_second,
             exist_dialogues_current_user_is_first
         )
-
-        print("!!!!!!!!!! ", exist_dialogues_summary)
 
         possible_dialogues_raw = session.exec(
             select(
